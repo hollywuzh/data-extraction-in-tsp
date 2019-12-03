@@ -8,13 +8,20 @@ while ischar(tline)
         tline = fgetl(fid);
         continue;
     end 
-    if i==(scale+2) %%注意这是最后一行,2 = vihecle的数目 + 1
+    if i==(scale+2)             %%注意这是最后一行,2 = vihecle的数目 + 1
         break;
     end
-    c = regexp(tline,' ','split');
-       % 提取c中节点ID    
-       %%function 提取坐标信息
-
+    splitc = regexp(tline,' ','split');
+   % 提取c中节点ID
+   sc=str2double(splitc);   % transmit a cell to an array
+   id=find(isnan(sc)==1);   % find the index which is Nan
+   drawsc=sc(1:id(1)-1);
+   %
+   % function 提取坐标信息
+   % 画图
+   plot(a(drawsc',1),a(drawsc',2));
+   hold on
+   scatter(a(:,1),a(:,2))
     tline = fgetl(fid);
     i=i+1;
 end
